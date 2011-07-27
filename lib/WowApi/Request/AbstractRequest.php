@@ -53,9 +53,12 @@ abstract class AbstractRequest implements RequestInterface {
     }
 
     public function send($path, $method = 'GET', array $parameters = array()) {
+        //Set the path to the full path before checking the cache
+         $path = $this->getFullPath($path);
+        
         // Check the cache
         if($cache = $this->isCached($path, $parameters)) {
-            if ($cache && isset($cache['cachedAt']) && (time() - $cache['cachedAt']) < $this->client->options['ttl']) {
+            if ($cache && isset($cache['cachedAt']) && (time() - $cache['cachedAt']) < $this->client->options->get('ttl')) {
                 return $cache;
             }
             if (isset($cache) && isset($cache['lastModified'])) {
@@ -64,8 +67,6 @@ abstract class AbstractRequest implements RequestInterface {
         }
 
         //Make request
-        $path     = $this->getFullPath($path);
-
         if($method === 'GET') {
             $url = $this->getUrl($path, $parameters);
         } else {
@@ -109,7 +110,9 @@ abstract class AbstractRequest implements RequestInterface {
 
     protected function isCached($path, $parameters)
     {
-        if (($cache = $this->client->getCache()->getCachedResponse($path, $parameters) === false)) {
+        $cache = $this->client->getCache()->getCachedResponse($path, $parameters);
+        
+        if (($cache !== false)) {
             $cache = json_decode($cache, true);
 
             if($cache) {
