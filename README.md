@@ -123,6 +123,21 @@ $api->setRequest($request);
 $api->authenticate('PUBLICKEY', 'PRIVATEKEY');
 ```
 
+### Selecting an IP Address ###
+
+Utilizing multiple IP Addresses will grant you 3000 requests per IP address, increasing the overall requests you can make per day without an API Key. To specify an IP address to be used when making a request follow the example below. This can be an interface name, an IP address or a host name.
+
+``` php
+<?php
+use WowApi\Client;
+use WowApi\Request\Curl;
+
+$request = new Curl();
+$api = new Client();
+$api->setRequest($request);
+$api->setIP('127.0.0.1');
+```
+
 ### Using API resources ###
 
 #### Character APIs
