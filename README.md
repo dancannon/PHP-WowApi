@@ -71,7 +71,9 @@ use WowApi\Client;
 use WowApi\Request\Curl;
 
 $request = new Curl();
-$api = new Client($request);
+$api = new Client(array(
+    'optionkey' => 'optionvalue',
+);
 $api->setRequest($request);
 $api->setRegion('eu');
 ```
@@ -108,7 +110,7 @@ $api->setCache($cache);
 
 ### Authenticating ###
 
-**Note**: Authentication is not yet active, check the API forums for more info
+**Note**: This client now works with authentication.
 
 Authenticating your application means that you are able to make more than 3000 API calls a day. To authenticate your application you must first register for a set of public and private keys. You must then call the authenticate method as shown below.
 
