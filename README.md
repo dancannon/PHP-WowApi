@@ -91,6 +91,22 @@ $api->setRequest($request);
 $api->setRegion('eu', 'en_GB');
 ```
 
+You can also set the curl options for a request. This can be an interface name, an IP address or a host name:
+
+``` php
+<?php
+use WowApi\Client;
+use WowApi\Request\Curl;
+
+$request = new Curl();
+$api = new Client(array(
+    'curlOptions' => array(
+        CURLOPT_INTERFACE => '127.0.0.1',
+    ),
+));
+$api->setRequest($request);
+```
+
 ### Caching ###
 
 To reduce the amount of api calls that are made the application uses a cache adaptor to store the last response and deal with the If-Modified-Since and Last-Modified headers as recommended by blizzard. The available cache adaptors are: Apc, Memcache, Redis(Using the Predis lib), Simple(Stores data in an array) and Null(Doesnt cache but is used for testing).. To use the cache adaptor you should use the following code:
