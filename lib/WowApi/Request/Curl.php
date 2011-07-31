@@ -40,13 +40,7 @@ class Curl extends AbstractRequest
         }
         $curlOptions[CURLOPT_HTTPHEADER] = $this->headers->getHeaders();
 
-        $address = $this->client->options->get('ipAddress');
-        if(isset($address)) {
-            $curlOptions[CURLOPT_INTERFACE] = $address;
-            
-        }
-        
-	// Prepare Data
+		// Prepare Data
         if (!empty($parameters)) {
             switch($method) {
                 case 'POST':

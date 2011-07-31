@@ -105,16 +105,6 @@ class Client
         $this->options->set('publicKey', $publicKey);
         $this->options->set('privateKey', $privateKey);
     }
-    
-    /**
-     * Set the IP Address to use when making the request
-     * @param $address
-     * @return void
-     */
-    public function setIP($address)
-    {
-        $this->options->set('ipAddress', $address);
-    }
 
     /**
      * Set the region
