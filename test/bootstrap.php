@@ -12,5 +12,4 @@ spl_autoload_register(function($class)
 });
 
 require __DIR__.'/Shared.php';
-require __DIR__.'/Keys.php';
 

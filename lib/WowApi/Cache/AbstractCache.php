@@ -24,6 +24,6 @@ abstract class AbstractCache implements CacheInterface
 
     protected function getHash($path, $parameters)
     {
-        return md5($path . serialize($parameters));
+        return md5($path . json_encode($parameters));
     }
 }
