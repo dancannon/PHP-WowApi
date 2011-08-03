@@ -144,7 +144,10 @@ abstract class AbstractRequest implements RequestInterface {
         if ($publicKey !== null && $privateKey !== null) {
             $date = gmdate(DATE_RFC1123);
 
-            $stringToSign = "$method\n" . $date . "\n$path\n";
+            //Signed requests don't like urlencoded quotes
+            $path = str_replace('%27', '\'',$path); 
+
+            $stringToSign = "$method\n" . $date . "\n".$path."\n";
             $signature = base64_encode(hash_hmac('sha1',$stringToSign, $privateKey, true));
 
             $this->headers->set("Authorization", "BNET" . " " . $publicKey . ":" . $signature);

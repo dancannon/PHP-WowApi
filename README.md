@@ -153,9 +153,9 @@ $request = new Curl();
 $api = new Client();
 $api->setRequest($request);
 # Fetch character info
-$api->getCharacterApi->getCharacter('REALMNAME', 'CHARACTERNAME');
+$api->getCharacterApi()->getCharacter('REALMNAME', 'CHARACTERNAME');
 # Fetch optional fields
-$api->getCharacterApi->getCharacter('REALMNAME', 'CHARACTERNAME', array('guild', 'stats'));
+$api->getCharacterApi()->getCharacter('REALMNAME', 'CHARACTERNAME', array('guild', 'stats'));
 ```
 
 #### Guild APIs
@@ -168,11 +168,11 @@ $request = new Curl();
 $api = new Client();
 $api->setRequest($request);
 # Fetch guild info
-$api->getGuildApi->getGuild('REALMNAME', 'GUILDNAME');
+$api->getGuildApi()->getGuild('REALMNAME', 'GUILDNAME');
 # Fetch optional fields
-$api->getGuildApi->getGuild('REALMNAME', 'GUILDNAME', array('members'));
+$api->getGuildApi()->getGuild('REALMNAME', 'GUILDNAME', array('members'));
 # Fetch all fields
-$api->getGuildApi->getGuild('REALMNAME', 'GUILDNAME', true);
+$api->getGuildApi()->getGuild('REALMNAME', 'GUILDNAME', true);
 ```
 
 #### Realm APIs
@@ -185,9 +185,24 @@ $request = new Curl();
 $api = new Client();
 $api->setRequest($request);
 # Fetch all realms
-$api->getRealmApi->getRealms();
+$api->getRealmApi()->getRealms();
 # Fetch multiple realms
-$api->getRealmApi->getRealms(array('REALM1', 'REALM2'));
+$api->getRealmApi()->getRealms(array('REALM1', 'REALM2'));
 # Fetch a single realms status
-$api->getRealmApi->getRealm('REALMNAME'));
+$api->getRealmApi()->getRealm('REALMNAME'));
+```
+
+#### Arena APIs
+``` php
+<?php
+use WowApi\Client;
+use WowApi\Request\Curl;
+
+$request = new Curl();
+$api = new Client();
+$api->setRequest($request);
+# Fetch arena info
+$rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE');
+# Fetch all fields
+$rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE', TRUE);
 ```

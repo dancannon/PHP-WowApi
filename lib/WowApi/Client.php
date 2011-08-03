@@ -6,6 +6,7 @@ use WowApi\Exception\Exception;
 use WowApi\Request\Curl;
 use WowApi\Request\RequestInterface;
 use WowApi\Api\ApiInterface;
+use WowApi\Api\Arena;
 use WowApi\Api\Character;
 use WowApi\Api\Classes;
 use WowApi\Api\Items;
@@ -182,6 +183,19 @@ class Client
 
     /** API's **/
 
+    /**
+     * Returns the arena API
+     * @return \WowApi\Api\Arena
+     */
+    public function getArenaApi()
+    {
+        if (!$this->apis->get('arena')) {
+            $this->apis->set('arena', new Arena($this));
+        }
+
+        return $this->apis->get('arena');
+    }
+    
     /**
      * Returns the character API
      * @return \WowApi\Api\Character
