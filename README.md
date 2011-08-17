@@ -15,8 +15,8 @@ PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
     - Guild
     - Guild Perks
     - Guild Rewards
-    - Realm
     - Items
+    - Realm
 - Supports application authentication
 - Includes a cache to take advantage of LastModified headers
 **Note**: Not all APIs are currently active, check the API forums for more info
@@ -41,7 +41,9 @@ spl_autoload_register(function($class) {
 
 ## Use ##
 
-To use the library you must first create an instance of the the Client class. Because this library supports multiple request adaptors you will need to pass the client class an instance of a request adaptor. Currently the only adaptor available is the Curl adaptor.
+To use the library you must first create an instance of the the Client class. Because this library supports multiple request adaptors you will need to pass the client class an instance of a request adaptor. Currently the only adaptor available is the Curl adaptor. 
+
+When using in a loop or long running program, be sure to unset both $api and $request after you are done with them and before using them for another character, or memory usage will continue to increase.
 
 ``` php
 <?php
@@ -101,11 +103,8 @@ use WowApi\Client;
 use WowApi\Request\Curl;
 
 $request = new Curl();
-$api = new Client(array(
-    'curlOptions' => array(
-        CURLOPT_INTERFACE => '127.0.0.1',
-    ),
-));
+$api = new Client();
+$request->setOpt(CURLOPT_INTERFACE, 'localhost');
 $api->setRequest($request);
 ```
 
