@@ -19,4 +19,17 @@ class Arena extends AbstractProfileApi
         
         return $arena;
     }
+    
+    public function getArenaLadder($battlegroup, $size, $count = 50)
+    {
+        /**
+         * @todo Add support for the count field, it caps at 2000
+         */
+        $arena = $this->get($this->generatePath('arena/:battlegroup/:size/', array(
+            'battlegroup' => $battlegroup,
+            'size' => $size,
+        )));
+        
+        return $arena;
+    }
 }
