@@ -7,6 +7,7 @@ PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
 
 - Support for Blizzards new JSON API
 - Works with the following resources:
+    - Achievements
     - Arena
     - Auction House
     - Character
@@ -16,6 +17,7 @@ PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
     - Guild Perks
     - Guild Rewards
     - Items
+    - Quests
     - Realm
 - Supports application authentication
 - Includes a cache to take advantage of LastModified headers
@@ -144,6 +146,21 @@ $api->authenticate('PUBLICKEY', 'PRIVATEKEY');
 
 ### Using API resources ###
 
+#### Achievement APIs
+``` php
+<?php
+use WowApi\Client;
+use WowApi\Request\Curl;
+
+$request = new Curl();
+$api = new Client();
+$api->setRequest($request);
+# Fetch character achievement definitions
+$rawdata = $api->getAchievementsApi()->getCharacterAchievements();
+# Fetch guild achievement definitions
+$rawdata = $api->getAchievementsApi()->getGuildAchievements();
+```
+
 #### Character APIs
 ``` php
 <?php
@@ -206,4 +223,17 @@ $api->setRequest($request);
 $rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE');
 # Fetch all fields
 $rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE', TRUE);
+```
+
+#### Quest APIs
+``` php
+<?php
+use WowApi\Client;
+use WowApi\Request\Curl;
+
+$request = new Curl();
+$api = new Client();
+$api->setRequest($request);
+# Fetch quest info
+$rawdata = $api->getQuestsApi()->getQuest('QUESTID');
 ```
