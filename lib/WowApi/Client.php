@@ -14,6 +14,7 @@ use WowApi\Api\Items;
 use WowApi\Api\Guild;
 use WowApi\Api\GuildPerks;
 use WowApi\Api\GuildRewards;
+use WowApi\Api\Quests;
 use WowApi\Api\Races;
 use WowApi\Api\Realm;
 
@@ -317,6 +318,19 @@ class Client
         }
 
         return $this->apis->get('items');
+    }
+    
+    /**
+     * Returns the quest API
+     * @return \WowApi\Api\Quests
+     */
+    public function getQuestsApi()
+    {
+        if (!$this->apis->has('quests')) {
+            $this->apis->set('quests', new Quests($this));;
+        }
+
+        return $this->apis->get('quests');
     }
 
 }

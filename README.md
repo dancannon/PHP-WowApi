@@ -16,6 +16,7 @@ PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
     - Guild Perks
     - Guild Rewards
     - Items
+    - Quests
     - Realm
 - Supports application authentication
 - Includes a cache to take advantage of LastModified headers
@@ -206,4 +207,17 @@ $api->setRequest($request);
 $rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE');
 # Fetch all fields
 $rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE', TRUE);
+```
+
+#### Quest APIs
+``` php
+<?php
+use WowApi\Client;
+use WowApi\Request\Curl;
+
+$request = new Curl();
+$api = new Client();
+$api->setRequest($request);
+# Fetch quest info
+$rawdata = $api->getQuestsApi()->getQuest('QUESTID');
 ```
