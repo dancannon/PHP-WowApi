@@ -6,6 +6,7 @@ use WowApi\Exception\Exception;
 use WowApi\Request\Curl;
 use WowApi\Request\RequestInterface;
 use WowApi\Api\ApiInterface;
+use WowApi\Api\Achievements;
 use WowApi\Api\Arena;
 use WowApi\Api\Auction;
 use WowApi\Api\Character;
@@ -14,6 +15,7 @@ use WowApi\Api\Items;
 use WowApi\Api\Guild;
 use WowApi\Api\GuildPerks;
 use WowApi\Api\GuildRewards;
+use WowApi\Api\Quests;
 use WowApi\Api\Races;
 use WowApi\Api\Realm;
 
@@ -190,6 +192,19 @@ class Client
     /** API's **/
 
     /**
+     * Returns the achievements API
+     * @return \WowApi\Api\Achievements
+     */
+    public function getAchievementsApi()
+    {
+        if (!$this->apis->has('achievements')) {
+            $this->apis->set('achievements', new Achievements($this));;
+        }
+
+        return $this->apis->get('achievements');
+    }
+    
+    /**
      * Returns the arena API
      * @return \WowApi\Api\Arena
      */
@@ -317,6 +332,19 @@ class Client
         }
 
         return $this->apis->get('items');
+    }
+    
+    /**
+     * Returns the quest API
+     * @return \WowApi\Api\Quests
+     */
+    public function getQuestsApi()
+    {
+        if (!$this->apis->has('quests')) {
+            $this->apis->set('quests', new Quests($this));;
+        }
+
+        return $this->apis->get('quests');
     }
 
 }
