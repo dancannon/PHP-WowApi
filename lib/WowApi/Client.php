@@ -6,6 +6,7 @@ use WowApi\Exception\Exception;
 use WowApi\Request\Curl;
 use WowApi\Request\RequestInterface;
 use WowApi\Api\ApiInterface;
+use WowApi\Api\Achievements;
 use WowApi\Api\Arena;
 use WowApi\Api\Auction;
 use WowApi\Api\Character;
@@ -331,6 +332,19 @@ class Client
         }
 
         return $this->apis->get('quests');
+    }
+    
+    /**
+     * Returns the achievements API
+     * @return \WowApi\Api\Achievements
+     */
+    public function getAchievementsApi()
+    {
+        if (!$this->apis->has('achievements')) {
+            $this->apis->set('achievements', new Achievements($this));;
+        }
+
+        return $this->apis->get('achievements');
     }
 
 }
