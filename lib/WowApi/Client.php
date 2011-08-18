@@ -192,6 +192,19 @@ class Client
     /** API's **/
 
     /**
+     * Returns the achievements API
+     * @return \WowApi\Api\Achievements
+     */
+    public function getAchievementsApi()
+    {
+        if (!$this->apis->has('achievements')) {
+            $this->apis->set('achievements', new Achievements($this));;
+        }
+
+        return $this->apis->get('achievements');
+    }
+    
+    /**
      * Returns the arena API
      * @return \WowApi\Api\Arena
      */
@@ -332,19 +345,6 @@ class Client
         }
 
         return $this->apis->get('quests');
-    }
-    
-    /**
-     * Returns the achievements API
-     * @return \WowApi\Api\Achievements
-     */
-    public function getAchievementsApi()
-    {
-        if (!$this->apis->has('achievements')) {
-            $this->apis->set('achievements', new Achievements($this));;
-        }
-
-        return $this->apis->get('achievements');
     }
 
 }

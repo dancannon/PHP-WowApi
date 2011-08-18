@@ -13,4 +13,10 @@ class Items extends AbstractApi
 
         return $item;
     }
+    
+    public function getItemClasses()
+    {
+        return $this->get('data/item/classes');
+    }
+    
 }
