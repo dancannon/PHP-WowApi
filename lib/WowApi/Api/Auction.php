@@ -5,15 +5,18 @@ class Auction extends AbstractApi
 {
     public function getAuctions($realm)
     {
-        $cacheEngine = $this->client->getCache();
         $index = $this->getAuctionIndex($realm);
 
         if($index) {
-            $auctions = $this->getRequest()->send($index['url']);
-            return $auctions;
+            return $this->getAuctionDump($index['url']);
         }
 
         return false;
+    }
+
+    public function getAuctionDump($url)
+    {
+        return $this->getRequest()->send($url);
     }
 
     public function getAuctionIndex($realm)
