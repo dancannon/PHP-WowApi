@@ -106,7 +106,7 @@ abstract class AbstractApi implements ApiInterface
     /**
      * {@inheritdoc}
      */
-    public function generatePath($path, $parameters)
+    public function generatePath($path, $parameters=array())
     {
         $replacements = array();
 
