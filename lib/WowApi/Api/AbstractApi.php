@@ -86,15 +86,11 @@ abstract class AbstractApi implements ApiInterface
 
                 if (is_array($filter) && in_array($result[$key], $filter)) {
                     $clean[] = $result;
-
+                } elseif ($filter instanceof \Closure && $filter($result[$key])) {
+                    $clean[] = $result;
                 } else {
-                    if ($filter instanceof \Closure && $filter($result[$key])) {
+                    if ($result[$key] === $filter) {
                         $clean[] = $result;
-
-                    } else {
-                        if ($result[$key] == $filter) {
-                            $clean[] = $result;
-                        }
                     }
                 }
             }

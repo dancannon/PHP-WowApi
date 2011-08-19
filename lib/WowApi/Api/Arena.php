@@ -25,7 +25,7 @@ class Arena extends AbstractProfileApi
         return $arenas;
     }
 
-    public function getArena($name, $realm, $teamSize, $fields = array())
+    public function getArena($realm, $teamSize, $name, $fields = array())
     {
         $this->setFields($fields);
 

@@ -25,14 +25,14 @@ class Realm extends AbstractApi
     /**
      * Constants for server status.
      */
-    const STATUS_UP = 1;
-    const STATUS_DOWN = 0;
+    const STATUS_UP = true;
+    const STATUS_DOWN = false;
 
     /**
      * Constants for queue status.
      */
-    const QUEUE_YES = 1;
-    const QUEUE_NO = 0;
+    const QUEUE_YES = true;
+    const QUEUE_NO = false;
 
     /**
      * Realm data structure.
@@ -47,7 +47,7 @@ class Realm extends AbstractApi
      * @access protected
      * @var array
      */
-    protected $_schema = array(
+    protected $schema = array(
         'type' => array(
             self::TYPE_PVE,
             self::TYPE_PVP,
