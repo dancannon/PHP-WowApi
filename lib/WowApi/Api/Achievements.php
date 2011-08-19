@@ -3,7 +3,7 @@ namespace WowApi\Api;
 
 use WowApi\Utilities;
 
-class Achievements extends AbstractProfileApi
+class Achievements extends AbstractApi
 {
     public function getCharacterAchievements()
     {

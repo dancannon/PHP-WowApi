@@ -3,7 +3,7 @@ namespace WowApi\Api;
 
 use WowApi\Utilities;
 
-class Quests extends AbstractProfileApi
+class Quests extends AbstractApi
 {
     public function getQuest($questId)
     {
