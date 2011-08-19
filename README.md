@@ -156,9 +156,28 @@ $request = new Curl();
 $api = new Client();
 $api->setRequest($request);
 # Fetch character achievement definitions
-$rawdata = $api->getAchievementsApi()->getCharacterAchievements();
+$api->getAchievementsApi()->getCharacterAchievements();
 # Fetch guild achievement definitions
-$rawdata = $api->getAchievementsApi()->getGuildAchievements();
+$api->getAchievementsApi()->getGuildAchievements();
+```
+
+#### Arena APIs
+``` php
+<?php
+use WowApi\Client;
+use WowApi\Request\Curl;
+
+$request = new Curl();
+$api = new Client();
+$api->setRequest($request);
+# Fetch arena info
+$api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE');
+# Fetch all fields
+$api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE', TRUE);
+# Fetch arena ladder
+$api->getArenaApi()->getArenaLadder('BATTLEGROUP', 'TEAMSIZE');
+# Fetch a certain number of teams on the ladder (NYI)
+$api->getArenaApi()->getArenaLadder('BATTLEGROUP', 'TEAMSIZE', NUMBEROFTEAMS);
 ```
 
 #### Character APIs
@@ -210,21 +229,6 @@ $api->getRealmApi()->getRealms(array('REALM1', 'REALM2'));
 $api->getRealmApi()->getRealm('REALMNAME'));
 ```
 
-#### Arena APIs
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-# Fetch arena info
-$rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE');
-# Fetch all fields
-$rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE', TRUE);
-```
-
 #### Quest APIs
 ``` php
 <?php
@@ -235,5 +239,5 @@ $request = new Curl();
 $api = new Client();
 $api->setRequest($request);
 # Fetch quest info
-$rawdata = $api->getQuestsApi()->getQuest('QUESTID');
+$api->getQuestsApi()->getQuest('QUESTID');
 ```

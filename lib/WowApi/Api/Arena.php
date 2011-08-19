@@ -11,7 +11,7 @@ class Arena extends AbstractProfileApi
     {
         $this->setFields($fields);
         
-        $arena = $this->get($this->generatePath('/pvp/arena/:realm/:size/:name', array(
+        $arena = $this->get($this->generatePath('/arena/:realm/:size/:name', array(
             'realm' => $realm,
             'size' => $size,
             'name' => $name,
