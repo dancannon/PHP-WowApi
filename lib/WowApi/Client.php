@@ -12,6 +12,7 @@ use WowApi\Api\Auction;
 use WowApi\Api\Character;
 use WowApi\Api\Classes;
 use WowApi\Api\Items;
+use WowApi\Api\ItemClasses;
 use WowApi\Api\Guild;
 use WowApi\Api\GuildPerks;
 use WowApi\Api\GuildRewards;
@@ -203,7 +204,7 @@ class Client
 
         return $this->apis->get('achievements');
     }
-    
+
     /**
      * Returns the arena API
      * @return \WowApi\Api\Arena
@@ -333,7 +334,20 @@ class Client
 
         return $this->apis->get('items');
     }
-    
+
+    /**
+     * Returns the item API
+     * @return \WowApi\Api\Items
+     */
+    public function getItemClassesApi()
+    {
+        if (!$this->apis->has('itemClasses')) {
+            $this->apis->set('itemClasses', new ItemClasses($this));;
+        }
+
+        return $this->apis->get('itemClasses');
+    }
+
     /**
      * Returns the quest API
      * @return \WowApi\Api\Quests
