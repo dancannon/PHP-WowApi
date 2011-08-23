@@ -80,7 +80,7 @@ class RealmTest extends PHPUnit_Framework_TestCase
 
     function testGetRealmWithSpace()
     {
-        $realm = $this->api->getRealm('Argent Dawn');
+        $realm = $this->api->getRealm('Argent-Dawn');
         $this->assertNotEquals(false, $realm);
         $this->assertArrayHasKey('type', $realm);
         $this->assertArrayHasKey('queue', $realm);

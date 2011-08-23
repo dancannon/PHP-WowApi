@@ -36,6 +36,7 @@ abstract class AbstractApi implements ApiInterface
      */
     public function get($path)
     {
+        var_dump($path);
         $parameters = $this->parameters->all(true);
 
         return $this->getRequest()->get($path, $parameters);

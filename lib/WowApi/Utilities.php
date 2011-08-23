@@ -45,10 +45,7 @@ class Utilities
         if(is_array($input)) {
             return array_map(array('\WowApi\Utilities', 'urlencode'), $input);
         } elseif (is_scalar($input)) {
-            //Remove all spaces
-            $input = str_replace(' ', '-', $input);
-
-            return urlencode($input);
+            return rawurlencode($input);
         } else {
             return '';
         }
