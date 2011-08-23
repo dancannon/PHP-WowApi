@@ -11,21 +11,21 @@ class Arena extends AbstractProfileApi
 
     protected $teamSizes = array('2v2', '3v3', '4v4');
 
-    public function getArenas($realm, $teamSize, $size=null)
+    public function getArenaLadder($battlegroup, $size, $count = 50)
     {
-        if($size) {
+        if($count) {
             $this->setQueryParam('size', $size);
         }
 
-        $arenas = $this->get($this->generatePath('arena/:realm/:teamSize', array(
-            'realm' => $realm,
-            'teamSize' => $teamSize,
+        $arenas = $this->get($this->generatePath('pvp/arena/:battlegroup/:size/', array(
+            'battlegroup' => $battlegroup,
+            'size' => $size,
         )));
 
         return $arenas;
     }
 
-    public function getArena($realm, $teamSize, $name, $fields = array())
+    public function getArenaTeam($realm, $teamSize, $name, $fields = array())
     {
         $this->setFields($fields);
 

@@ -1,6 +1,7 @@
-# PHP WowApi ![project status](http://stillmaintained.com/dancannon/PHP-WowApi.png) #
+# PHP WowApi
 
 PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
+
 **Note**: This library is still in development (even though Blizzard have released their own client) and tests will be added soon.
 
 ## Main features ##
@@ -23,6 +24,11 @@ PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
 - Includes a cache to take advantage of LastModified headers
 **Note**: Not all APIs are currently active, check the API forums for more info
 
+## Requirements ##
+
+* Curl Extension
+* JSON encode/decode Extension
+
 ## Installing ##
 
 PHP-WowApi uses the autoloading features of PHP and works with most of the major frameworks. To load the library manually you can use the following code, you will need to change the base path depending on where you store the library:
@@ -41,9 +47,9 @@ spl_autoload_register(function($class) {
 });
 ```
 
-## Use ##
+## How To Use ##
 
-To use the library you must first create an instance of the the Client class. Because this library supports multiple request adaptors you will need to pass the client class an instance of a request adaptor. Currently the only adaptor available is the Curl adaptor. 
+To use the library you must first create an instance of the the Client class. Because this library supports multiple request adaptors you will need to pass the client class an instance of a request adaptor. Currently the only adaptor available is the Curl adaptor.
 
 When using in a loop or long running program, be sure to unset both $api and $request after you are done with them and before using them for another character, or memory usage will continue to increase.
 
@@ -57,183 +63,18 @@ $api = new Client();
 $api->setRequest($request);
 ```
 
-### Configuration ###
+* [APIs](https://github.com/dancannon/PHP-WowApi/wiki/APIs)
+* [Examples](https://github.com/dancannon/PHP-WowApi/wiki/Examples)
+* [Authentication](https://github.com/dancannon/PHP-WowApi/wiki/Authentication)
+* [Caching](https://github.com/dancannon/PHP-WowApi/wiki/Caching)
+* [Testing](https://github.com/dancannon/PHP-WowApi/wiki/Testing)
 
-You can also pass an array of options the client class to configure the library. The following options are available however helper methods for most options exist in the Client class.
+## Contributing ##
+Before submitting a PR please ensure that all the tests still pass.
 
-- protocol (http, https, etc)
-- baseUrl
-- region
-- url
-- path
-- publicKey
-- privateKey
+## Special Thanks ##
 
-If you wish to change the gaming region you should use the setRegion method as shown below, the following regions are available (us, eu, kr, tw, cn)
+A special thanks goes out to the following contributing developers:
 
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client(array(
-    'optionkey' => 'optionvalue',
-);
-$api->setRequest($request);
-$api->setRegion('eu');
-```
-
-You can also set the locale, to view the options view the API documentation:
-
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client($request);
-$api->setRequest($request);
-$api->setRegion('eu', 'en_GB');
-```
-
-You can also set the curl options for a request. This can be an interface name, an IP address or a host name:
-
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$request->setOpt(CURLOPT_INTERFACE, 'localhost');
-$api->setRequest($request);
-```
-
-### Caching ###
-
-To reduce the amount of api calls that are made the application uses a cache adaptor to store the last response and deal with the If-Modified-Since and Last-Modified headers as recommended by blizzard. The available cache adaptors are: Apc, Memcache, Redis(Using the Predis lib), Simple(Stores data in an array) and Null(Doesnt cache but is used for testing).. To use the cache adaptor you should use the following code:
-
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-use WowApi\Cache\Apc;
-
-$request = new Curl();
-$cache = new Apc();
-$api = new Client();
-$api->setRequest($request);
-$api->setCache($cache);
-```
-
-### Authenticating ###
-
-**Note**: This client now works with authentication.
-
-Authenticating your application means that you are able to make more than 3000 API calls a day. To authenticate your application you must first register for a set of public and private keys. You must then call the authenticate method as shown below.
-
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-$api->authenticate('PUBLICKEY', 'PRIVATEKEY');
-```
-
-### Using API resources ###
-
-#### Achievement APIs
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-# Fetch character achievement definitions
-$rawdata = $api->getAchievementsApi()->getCharacterAchievements();
-# Fetch guild achievement definitions
-$rawdata = $api->getAchievementsApi()->getGuildAchievements();
-```
-
-#### Character APIs
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-# Fetch character info
-$api->getCharacterApi()->getCharacter('REALMNAME', 'CHARACTERNAME');
-# Fetch optional fields
-$api->getCharacterApi()->getCharacter('REALMNAME', 'CHARACTERNAME', array('guild', 'stats'));
-```
-
-#### Guild APIs
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-# Fetch guild info
-$api->getGuildApi()->getGuild('REALMNAME', 'GUILDNAME');
-# Fetch optional fields
-$api->getGuildApi()->getGuild('REALMNAME', 'GUILDNAME', array('members'));
-# Fetch all fields
-$api->getGuildApi()->getGuild('REALMNAME', 'GUILDNAME', true);
-```
-
-#### Realm APIs
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-# Fetch all realms
-$api->getRealmApi()->getRealms();
-# Fetch multiple realms
-$api->getRealmApi()->getRealms(array('REALM1', 'REALM2'));
-# Fetch a single realms status
-$api->getRealmApi()->getRealm('REALMNAME'));
-```
-
-#### Arena APIs
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-# Fetch arena info
-$rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE');
-# Fetch all fields
-$rawdata = $api->getArenaApi()->getArena('TEAMNAME', 'REALMNAME', 'TEAMSIZE', TRUE);
-```
-
-#### Quest APIs
-``` php
-<?php
-use WowApi\Client;
-use WowApi\Request\Curl;
-
-$request = new Curl();
-$api = new Client();
-$api->setRequest($request);
-# Fetch quest info
-$rawdata = $api->getQuestsApi()->getQuest('QUESTID');
-```
+* [chaud](https://github.com/chaud)
+* [simondlr](https://github.com/simondlr)
