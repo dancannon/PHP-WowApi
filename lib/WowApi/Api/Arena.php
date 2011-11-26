@@ -13,6 +13,10 @@ class Arena extends AbstractProfileApi
 
     public function getArenaLadder($battlegroup, $size, $count = 50)
     {
+        if($count) {
+            $this->setQueryParam('size', $count);
+        }
+
         $arenas = $this->get($this->generatePath('pvp/arena/:battlegroup/:size/', array(
             'battlegroup' => $battlegroup,
             'size' => $size,
