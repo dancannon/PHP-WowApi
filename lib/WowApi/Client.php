@@ -19,6 +19,7 @@ use WowApi\Api\GuildRewards;
 use WowApi\Api\Quests;
 use WowApi\Api\Races;
 use WowApi\Api\Realm;
+use WowApi\Api\Recipes;
 
 if (!function_exists('json_decode')) {
     throw new Exception('This API client needs the JSON PHP extension.');
@@ -51,14 +52,14 @@ class Client
         $this->apis = new ApiBag();
         $this->setCache(new Cache\Null());
         $this->options = new ParameterBag(array(
-            'protocol'   => 'http',
-            'region'     => 'us',
-            'locale'     => 'en_US',
-            'url'        => ':protocol://:region.battle.net:fullPath',
-            'fullPath'   => '/api/wow/:path',
-            'publicKey'  => null,
+            'protocol' => 'http',
+            'region' => 'us',
+            'locale' => 'en_US',
+            'url' => ':protocol://:region.battle.net:fullPath',
+            'fullPath' => '/api/wow/:path',
+            'publicKey' => null,
             'privateKey' => null,
-            'ttl'        => 3600,
+            'ttl' => 3600,
         ));
     }
 
@@ -66,11 +67,13 @@ class Client
      * Return supported regions
      * @return array
      */
-    protected function getSupportedRegions() {
+    protected function getSupportedRegions()
+    {
         return array('us', 'eu', 'kr', 'tw', 'cn');
     }
 
-    protected function getSupportedLocales($region) {
+    protected function getSupportedLocales($region)
+    {
         $locales = array(
             'us' => array('en_US', 'es_MX'),
             'eu' => array('en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE'),
@@ -79,7 +82,7 @@ class Client
             'cn' => array('zh_CN'),
         );
 
-        if(array_key_exists($region, $locales)) {
+        if (array_key_exists($region, $locales)) {
             return $locales[$region];
         }
 
@@ -106,12 +109,12 @@ class Client
      * @param bool $secure
      * @return void
      */
-    public function authenticate($publicKey, $privateKey, $secure=true)
+    public function authenticate($publicKey, $privateKey, $secure = true)
     {
         $this->options->set('publicKey', $publicKey);
         $this->options->set('privateKey', $privateKey);
 
-        if($secure) {
+        if ($secure) {
             $this->options->set('protocol', 'https');
         }
     }
@@ -124,21 +127,21 @@ class Client
      *
      * @return void
      */
-    public function setRegion($region, $locale=null)
+    public function setRegion($region, $locale = null)
     {
         $region = strtolower($region);
         $locales = $this->getSupportedLocales($region);
 
-        if(in_array($region, $this->getSupportedRegions()) && $locales !== false) {
+        if (in_array($region, $this->getSupportedRegions()) && $locales !== false) {
             $this->options->set('region', $region);
         } else {
             throw new \InvalidArgumentException(sprintf('The region `%s` is not supported.', $region));
         }
 
-        if($locale === null) {
+        if ($locale === null) {
             $this->options->set('locale', $locales[0]);
         } else {
-            if($locales !== false && in_array($locale, $locales)) {
+            if ($locales !== false && in_array($locale, $locales)) {
                 $this->options->set('locale', $locale);
             } else {
                 throw new \InvalidArgumentException(sprintf('The locale `%s` for region `%s` is not supported.', $locale, $region));
@@ -148,13 +151,13 @@ class Client
 
     /**
      * Get the request object
-
      *
      * @internal param $ Exception\Exception
      * @return \WowApi\Request\RequestInterface
      */
-    public function getRequest() {
-        if($this->request === null) {
+    public function getRequest()
+    {
+        if ($this->request === null) {
             throw new Exception("A request class must be specified.");
         }
 
@@ -166,7 +169,8 @@ class Client
      * @param \WowApi\Request\RequestInterface $request
      * @return void
      */
-    public function setRequest(\WowApi\Request\RequestInterface $request) {
+    public function setRequest(\WowApi\Request\RequestInterface $request)
+    {
         $request->setClient($this);
         $this->request = $request;
     }
@@ -199,7 +203,8 @@ class Client
     public function getAchievementsApi()
     {
         if (!$this->apis->has('achievements')) {
-            $this->apis->set('achievements', new Achievements($this));;
+            $this->apis->set('achievements', new Achievements($this));
+            ;
         }
 
         return $this->apis->get('achievements');
@@ -316,7 +321,8 @@ class Client
     public function getRealmApi()
     {
         if (!$this->apis->has('realm')) {
-            $this->apis->set('realm', new Realm($this));;
+            $this->apis->set('realm', new Realm($this));
+            ;
         }
 
         return $this->apis->get('realm');
@@ -329,7 +335,8 @@ class Client
     public function getItemsApi()
     {
         if (!$this->apis->has('items')) {
-            $this->apis->set('items', new Items($this));;
+            $this->apis->set('items', new Items($this));
+            ;
         }
 
         return $this->apis->get('items');
@@ -342,7 +349,8 @@ class Client
     public function getItemClassesApi()
     {
         if (!$this->apis->has('itemClasses')) {
-            $this->apis->set('itemClasses', new ItemClasses($this));;
+            $this->apis->set('itemClasses', new ItemClasses($this));
+            ;
         }
 
         return $this->apis->get('itemClasses');
@@ -355,10 +363,24 @@ class Client
     public function getQuestsApi()
     {
         if (!$this->apis->has('quests')) {
-            $this->apis->set('quests', new Quests($this));;
+            $this->apis->set('quests', new Quests($this));
+            ;
         }
 
         return $this->apis->get('quests');
     }
 
+    /**
+     * Returns the quest API
+     * @return \WowApi\Api\Recipes
+     */
+    public function getRecipeApi()
+    {
+        if (!$this->apis->has('recipes')) {
+            $this->apis->set('recipes', new Recipes($this));
+            ;
+        }
+
+        return $this->apis->get('recipes');
+    }
 }
