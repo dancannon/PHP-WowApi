@@ -372,9 +372,15 @@ class Client
 
     /**
      * Returns the quest API
+<<<<<<< HEAD
      * @return \WowApi\Api\Recipes
      */
     public function getRecipeApi()
+=======
+     * @return \WowApi\Api\Quests
+     */
+    public function getRecipeId()
+>>>>>>> 3bf50e38ae6143412160d8e59fc1bd0e0b80e91a
     {
         if (!$this->apis->has('recipes')) {
             $this->apis->set('recipes', new Recipes($this));
