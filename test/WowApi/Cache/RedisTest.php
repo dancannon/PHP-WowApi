@@ -16,7 +16,8 @@ class RedisTest extends AbstractCacheTest
 
     function getCacheAdaptor()
     {
-        return new Redis(new Predis\Client);
+        return new Redis(new Predis\Client());
     }
 }
+
 ?>
