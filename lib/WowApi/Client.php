@@ -322,7 +322,6 @@ class Client
     {
         if (!$this->apis->has('realm')) {
             $this->apis->set('realm', new Realm($this));
-            ;
         }
 
         return $this->apis->get('realm');
@@ -336,7 +335,6 @@ class Client
     {
         if (!$this->apis->has('items')) {
             $this->apis->set('items', new Items($this));
-            ;
         }
 
         return $this->apis->get('items');
@@ -344,13 +342,12 @@ class Client
 
     /**
      * Returns the item API
-     * @return \WowApi\Api\Items
+     * @return \WowApi\Api\ItemClasses
      */
     public function getItemClassesApi()
     {
         if (!$this->apis->has('itemClasses')) {
             $this->apis->set('itemClasses', new ItemClasses($this));
-            ;
         }
 
         return $this->apis->get('itemClasses');
@@ -364,7 +361,6 @@ class Client
     {
         if (!$this->apis->has('quests')) {
             $this->apis->set('quests', new Quests($this));
-            ;
         }
 
         return $this->apis->get('quests');
@@ -372,15 +368,9 @@ class Client
 
     /**
      * Returns the quest API
-<<<<<<< HEAD
      * @return \WowApi\Api\Recipes
      */
     public function getRecipeApi()
-=======
-     * @return \WowApi\Api\Quests
-     */
-    public function getRecipeId()
->>>>>>> 3bf50e38ae6143412160d8e59fc1bd0e0b80e91a
     {
         if (!$this->apis->has('recipes')) {
             $this->apis->set('recipes', new Recipes($this));
