@@ -19,9 +19,21 @@ class Guild extends AbstractProfileApi
         return $guild;
     }
 
-    private function createEmblem($guildData, $showlevel=TRUE, $width=215){
+    /**
+     * Returns an image resource containing the emblem
+     *
+     * Thanks to wowarmoryapi
+     * @see http://sourceforge.net/p/wowarmoryapi/
+     *
+     * @param array $guildData The guild data returned by the getGuild function
+     * @param bool $showlevel Whether to show the guild level
+     * @param bool $emblemShowRing Whether to show the ring
+     * @param int $width The width of the image
+     * @return resource
+     */
+    public function createEmblem($guildData, $showlevel=false, $emblemShowRing=false, $width=215){
 
-        if ($width > 1 AND $width < 215){
+        if ($width > 1 && $width < 215){
             $height = ($width/215)*230;
             $finalimg = imagecreatetruecolor($width, $height);
             $trans_colour = imagecolorallocatealpha($finalimg, 0, 0, 0, 127);
@@ -38,14 +50,14 @@ class Guild extends AbstractProfileApi
 
         $imgOut = imagecreatetruecolor(215, 230);
 
-        $emblemURL = dirname(__FILE__)."/img/emblems/emblem_".sprintf("%02s",$guildData['emblem']['icon']).".png";
-        $borderURL = dirname(__FILE__)."/img/borders/border_".sprintf("%02s",$guildData['emblem']['border']).".png";
-        $ringURL = dirname(__FILE__)."/img/static/ring-".$ring.".png";
-        $shadowURL = dirname(__FILE__)."/img/static/shadow_00.png";
-        $bgURL = dirname(__FILE__)."/img/static/bg_00.png";
-        $overlayURL = dirname(__FILE__)."/img/static/overlay_00.png";
-        $hooksURL = dirname(__FILE__)."/img/static/hooks.png";
-        $levelURL = dirname(__FILE__)."/img/static/";
+        $emblemURL = dirname(__FILE__)."/../../../img/emblems/emblem_".sprintf("%02s",$guildData['emblem']['icon']).".png";
+        $borderURL = dirname(__FILE__)."/../../../img/borders/border_".sprintf("%02s",$guildData['emblem']['border']).".png";
+        $ringURL = dirname(__FILE__)."/../../../img/static/ring-".$ring.".png";
+        $shadowURL = dirname(__FILE__)."/../../../img/static/shadow_00.png";
+        $bgURL = dirname(__FILE__)."/../../../img/static/bg_00.png";
+        $overlayURL = dirname(__FILE__)."/../../../img/static/overlay_00.png";
+        $hooksURL = dirname(__FILE__)."/../../../img/static/hooks.png";
+        $levelURL = dirname(__FILE__)."/../../../img/static/";
 
         imagesavealpha($imgOut,true);
         imagealphablending($imgOut, true);
@@ -92,7 +104,7 @@ class Guild extends AbstractProfileApi
         $x = 20;
         $y = 23;
 
-        if (!$this->emblemHideRing){
+        if ($emblemShowRing){
             imagecopy($imgOut,$ring,0,0,0,0, $ring_size[0],$ring_size[1]);
         }
         $size = getimagesize($shadowURL);
@@ -134,7 +146,7 @@ class Guild extends AbstractProfileApi
             imagecopyresampled($imgOut, $levelemblem, 143, 150,0,0, 215/3, 215/3, 215, 215);
         }
 
-        if ($width > 1 AND $width < 215){
+        if ($width > 1 && $width < 215){
             imagecopyresampled($finalimg, $imgOut, 0, 0, 0, 0, $width, $height, 215, 230);
         } else {
             $finalimg = $imgOut;
