@@ -75,9 +75,9 @@ class Client
     protected function getSupportedLocales($region)
     {
         $locales = array(
-            'us' => array('en_US', 'es_MX', 'pt_BR'),
-            'eu' => array('en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT'),
-            'kr' => array('ko_KR'),
+            'us' => array('en_US', 'es_MX'),
+            'eu' => array('en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE'),
+            'lr' => array('ko_kr'),
             'tw' => array('zh_TW'),
             'cn' => array('zh_CN'),
         );
