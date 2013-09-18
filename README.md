@@ -78,3 +78,7 @@ A special thanks goes out to the following contributing developers:
 
 * [chaud](https://github.com/chaud)
 * [simondlr](https://github.com/simondlr)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dancannon/php-wowapi/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
