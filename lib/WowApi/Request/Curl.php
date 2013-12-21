@@ -13,7 +13,7 @@ if (!function_exists('curl_init')) {
 class Curl extends AbstractRequest
 {
     protected $curl_opts = array(
-        CURLOPT_TIMEOUT        => 10,
+        CURLOPT_TIMEOUT        => 15,
         CURLOPT_ENCODING       => "gzip",
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_RETURNTRANSFER => true,
@@ -37,7 +37,7 @@ class Curl extends AbstractRequest
         $this->curl_opts[CURLOPT_URL]        = $url;
         $this->curl_opts[CURLOPT_HTTPHEADER] = $this->headers->getHeaders();
 
-		// Prepare Data
+	// Prepare Data
         if (!empty($parameters)) {
             switch($method) {
                 case 'POST':

@@ -5,7 +5,7 @@ use WowApi\Utilities;
 
 class Character extends AbstractProfileApi
 {
-    protected $fieldsWhitelist = array('guild', 'stats', 'talents', 'items', 'reputation', 'titles', 'professions', 'appearance', 'companions', 'mounts', 'pets', 'achievements', 'progression', 'pvp', 'quests');
+    protected $fieldsWhitelist = array('guild', 'stats', 'talents', 'items', 'reputation', 'titles', 'professions', 'appearance', 'pets', 'mounts', 'hunterPets', 'achievements', 'progression', 'pvp', 'quests', 'petSlots', 'statistics');
 
     public function getCharacter($realm, $character, $fields = array())
     {

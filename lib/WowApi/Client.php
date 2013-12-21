@@ -9,6 +9,7 @@ use WowApi\Api\ApiInterface;
 use WowApi\Api\Achievements;
 use WowApi\Api\Arena;
 use WowApi\Api\Auction;
+use WowApi\Api\Challenge;
 use WowApi\Api\Character;
 use WowApi\Api\Classes;
 use WowApi\Api\Items;
@@ -234,6 +235,19 @@ class Client
         }
 
         return $this->apis->get('auction');
+    }
+    
+    /**
+     * Returns the challenge API
+     * @return \WowApi\Api\Challenge
+     */
+    public function getChallengeApi()
+    {
+        if (!$this->apis->has('challenge')) {
+            $this->apis->set('challenge', new Challenge($this));
+        }
+
+        return $this->apis->get('challenge');
     }
 
     /**
