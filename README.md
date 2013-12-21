@@ -9,8 +9,9 @@ PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
 - Support for Blizzards new JSON API
 - Works with the following resources:
     - Achievements
-    - Arena
+    - Arena and Rated Battleground Leaderboard
     - Auction House
+    - Challenge Mode Leaderboard
     - Character
     - Character Classes
     - Character Races
