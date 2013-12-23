@@ -51,16 +51,21 @@ class Client
     {
         $this->apis = new ApiBag();
         $this->setCache(new Cache\Null());
-        $this->options = new ParameterBag(array(
-            'protocol' => 'http',
-            'region' => 'us',
-            'locale' => 'en_US',
-            'url' => ':protocol://:region.battle.net:fullPath',
-            'fullPath' => '/api/wow/:path',
-            'publicKey' => null,
-            'privateKey' => null,
-            'ttl' => 3600,
-        ));
+        $this->options = new ParameterBag(
+            array_merge(
+                array(
+                    'protocol' => 'http',
+                    'region' => 'us',
+                    'locale' => 'en_US',
+                    'url' => ':protocol://:region.battle.net:fullPath',
+                    'fullPath' => '/api/wow/:path',
+                    'publicKey' => null,
+                    'privateKey' => null,
+                    'ttl' => 3600,
+                ),
+                $options
+            )
+        );
     }
 
     /**

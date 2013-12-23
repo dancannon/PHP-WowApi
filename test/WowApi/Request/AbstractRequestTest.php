@@ -17,7 +17,7 @@ abstract class AbstractRequestTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException        WowApi\Exception\NotFoundException
-     * @expectedExceptionMessage Page not found.
+     * @expectedExceptionMessage page not found
      */
     public function testSendToNonExistantPath()
     {
