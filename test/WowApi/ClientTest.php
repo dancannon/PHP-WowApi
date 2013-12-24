@@ -72,6 +72,13 @@ class ClientTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($client->options->get('locale'), 'zh_CN');
     }
 
+    function testConstructorParameter()
+    {
+        $client = new Client(array('ttl' => 1));
+
+        $this->assertSame(1, $client->options->get('ttl'));
+    }
+
     /**
      * @expectedException        \InvalidArgumentException
      * @expectedExceptionMessage The region `doesntexist` is not supported.
