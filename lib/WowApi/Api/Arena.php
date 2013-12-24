@@ -9,16 +9,11 @@ class Arena extends AbstractProfileApi
 
     protected $queryWhitelist = array('size', 'fields');
 
-    protected $teamSizes = array('2v2', '3v3', '4v4');
+    protected $teamSizes = array('2v2', '3v3', '5v5', 'rbg');
 
-    public function getArenaLadder($battlegroup, $size, $count = 50)
+    public function getArenaLadder($size)
     {
-        if($count) {
-            $this->setQueryParam('size', $count);
-        }
-
-        $arenas = $this->get($this->generatePath('pvp/arena/:battlegroup/:size/', array(
-            'battlegroup' => $battlegroup,
+        $arenas = $this->get($this->generatePath('leaderboard/:size/', array(
             'size' => $size,
         )));
 
