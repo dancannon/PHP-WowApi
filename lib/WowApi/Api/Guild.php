@@ -5,7 +5,7 @@ use WowApi\Utilities;
 
 class Guild extends AbstractProfileApi
 {
-    protected $fieldsWhitelist = array('members', 'achievements');
+    protected $fieldsWhitelist = array('members', 'achievements', 'news', 'challenge');
 
     public function getGuild($realm, $guild, $fields = array())
     {
