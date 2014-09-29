@@ -1,8 +1,9 @@
-# PHP WowApi
+# PHP WowApi [![deprecated](http://badges.github.io/stability-badges/dist/deprecated.svg)](http://github.com/badges/stability-badges)
+
 
 PHP-WowApi is a PHP (>= 5.3) API client for Blizzard's Community Platform API
 
-**Note**: This library is still in development (even though Blizzard have released their own client) and tests will be added soon.
+**Note**: This library is no longer in development.
 
 ## Main features ##
 
